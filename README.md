@@ -239,4 +239,4 @@ docker compose down
 ## 🧑‍💻 Author
 **Abraham Asrat**  
 📧 [abrahamasrat791@gmail.com](mailto:abrahamasrat791@gmail.com)  
-💼 [LinkedIn / GitHub profile link]
+💼 [[LinkedIn](https://www.linkedin.com/in/abraham-asrat) / [GitHub profile link](https://github.com/abrs7)]
