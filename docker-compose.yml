@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: ./backend          # 👈 builds image from backend/Dockerfile
+    container_name: sales_backend
+    ports:
+      - "50051:50051"
+      - "8080:8080"
+
+  envoy:
+    build: ./envoy            # 👈 builds image from envoy/Dockerfile
+    container_name: sales_envoy
+    ports:
+      - "8081:8081"
+    depends_on:
+      - backend
+
+  frontend:
+    image: node:20            # 👈 pulls public Node.js 20 image
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    command: ["sh", "-c", "npm run dev -- -H 0.0.0.0"]
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - envoy

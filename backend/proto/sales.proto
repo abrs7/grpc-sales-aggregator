@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package sales.v1;
+
+// Upload large CSV via client-streaming. Server processes and returns a result link & stats.
+service SalesService {
+  rpc UploadCSV (UploadRequest) returns (UploadResponse);
+  rpc DownloadResult (DownloadRequest) returns (DownloadResponse); // optional: gRPC file bytes
+}
+
+message UploadChunk {
+  bytes data = 1;          // raw CSV bytes
+  string filename = 2;     // optional: original filename (sent once or often)
+  bool eof = 3;            // optional: client can set true in final chunk
+}
+
+message UploadRequest {
+  bytes data = 1;
+  string filename = 2;
+}
+
+message UploadResponse {
+  string result_id = 1;        // UUID-ish id (derived from filename)
+  string download_url = 2;     // http://... served by built-in static server
+  uint64 rows = 3;             // processed rows
+  uint64 bad_rows = 4;         // skipped malformed rows
+  uint64 departments = 5;      // unique departments
+  double elapsed_sec = 6;      // processing time
+}
+
+message DownloadRequest {
+  string result_id = 1; // or exact filename
+}
+
+message DownloadResponse {
+  bytes data = 1; // CSV content (alternative to HTTP)
+}
