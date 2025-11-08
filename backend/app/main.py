@@ -43,7 +43,9 @@ def serve_grpc():
 
 if __name__ == "__main__":
     # Run HTTP static server in a background thread
+    print(f"[HTTP] Serving results from {RESULTS_DIR} at http://{HTTP_HOST}:{HTTP_PORT}/results/<file>")
     t = threading.Thread(target=serve_static_results, daemon=True)
     t.start()
     # Run gRPC server (blocking)
+    print(f"[gRPC] Listening on {GRPC_HOST}:{GRPC_PORT}")
     serve_grpc()

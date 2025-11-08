@@ -237,6 +237,6 @@ docker compose down
 ---
 
 ## 🧑‍💻 Author
-**Your Name**  
+**Abraham Asrat**  
 📧 [abrahamasrat791@gmail.com](mailto:abrahamasrat791@gmail.com)  
 💼 [LinkedIn / GitHub profile link]
